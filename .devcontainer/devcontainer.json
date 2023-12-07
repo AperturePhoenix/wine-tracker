@@ -1,0 +1,6 @@
+{
+  "name": "Wine Tracker",
+  "build": { "dockerfile": "Dockerfile" },
+  "remoteUser": "node",
+  "postCreateCommand": "bash .devcontainer/post-install.sh"
+}
