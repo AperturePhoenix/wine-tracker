@@ -1,0 +1,9 @@
+{
+  "debug.onTaskErrors": "debugAnyway",
+  "eslint.format.enable": true,
+  "eslint.workingDirectories": [
+    "backend",
+    "frontend"
+  ],
+  "editor.formatOnSave": true
+}
