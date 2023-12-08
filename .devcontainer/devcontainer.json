@@ -19,7 +19,8 @@
 		"vscode": {
 			"extensions": [
 				"dbaeumer.vscode-eslint",
-				"eamodio.gitlens"
+				"eamodio.gitlens",
+				"bradlc.vscode-tailwindcss"
 			]
 		}
 	},
