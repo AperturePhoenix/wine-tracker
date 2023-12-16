@@ -8,16 +8,3 @@ export default function Input(
 ): JSX.Element {
   return <input className="rounded p-2 text-black" type="text" {...props} />
 }
-
-export function Password(
-  props: DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  >
-): JSX.Element {
-  return (
-    <div>
-      <input className="rounded p-2 text-black" type="password" {...props} />
-    </div>
-  )
-}

@@ -1,4 +1,5 @@
 import Input from '@Components/Input'
+import Password from '@Components/Password'
 import { FormEvent } from 'react'
 
 export default function LoginPage(): JSX.Element {
@@ -13,7 +14,7 @@ export default function LoginPage(): JSX.Element {
       onSubmit={onSubmit}
     >
       <Input placeholder="Username" type="text" required minLength={4} />
-      <Input placeholder="Password" type="password" required minLength={4} />
+      <Password placeholder="Password" required minLength={4} />
       <button type="submit" className="text-lg">
         Login
       </button>
