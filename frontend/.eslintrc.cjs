@@ -21,6 +21,7 @@ module.exports = {
     'import/no-absolute-path': 'off',
     "import/no-extraneous-dependencies": ["error", {"devDependencies": ["vite.config.ts", "**/*.spec.js"]}],
     'prettier/prettier': 'error',
+    'react/jsx-props-no-spreading': "off",
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },

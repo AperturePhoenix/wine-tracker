@@ -1,11 +1,7 @@
-import './App.css'
+import LoginPage from '@Pages/Login/View'
 
 function App() {
-  return (
-    <div className="app bg-white text-black dark:bg-slate-800 dark:text-white">
-      Hello, World!
-    </div>
-  )
+  return <LoginPage />
 }
 
 export default App
