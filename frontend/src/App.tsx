@@ -1,7 +1,7 @@
-import LoginPage from '@Pages/Login/View'
+import AddWineView from '@Pages/AddWine/View'
 
 function App() {
-  return <LoginPage />
+  return <AddWineView />
 }
 
 export default App

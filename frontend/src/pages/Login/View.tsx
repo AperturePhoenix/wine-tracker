@@ -2,7 +2,7 @@ import Input from '@Components/Input'
 import Password from '@Components/Password'
 import { FormEvent } from 'react'
 
-export default function LoginPage(): JSX.Element {
+export default function LoginView(): JSX.Element {
   const onSubmit = (event: FormEvent): void => {
     event.preventDefault()
     alert('Submitted')

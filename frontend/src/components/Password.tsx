@@ -21,7 +21,7 @@ export default function Password(
         type="button"
         onClick={() => setVisible(!visible)}
         aria-label="togglePasswordVisibility"
-        className="text-black absolute top-1 right-1 rounded-full transition-all duration-200 bg-black bg-opacity-0 hover:bg-opacity-20 h-[2rem] w-[2rem] flex justify-center items-center"
+        className="text-black absolute top-1 right-1 rounded-full transition-all duration-200 bg-black bg-opacity-0 hover:bg-opacity-20 h-8 w-8 flex justify-center items-center"
       >
         <FontAwesomeIcon icon={visible ? faEye : faEyeSlash} />
       </button>
