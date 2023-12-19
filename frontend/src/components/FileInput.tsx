@@ -22,6 +22,8 @@ export default function FileInput({
   const handleClear = (): void => {
     if (onChange) onChange()
     setFileName(undefined)
+    const input = document.getElementById(id) as HTMLInputElement
+    input.value = ''
   }
 
   return (
