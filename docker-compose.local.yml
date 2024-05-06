@@ -11,3 +11,6 @@ services:
     restart: unless-stopped
     ports:
       - 5432:5432
+    environment:
+      POSTGRES_USER: user1
+      POSTGRES_PASSWORD: user1pass
