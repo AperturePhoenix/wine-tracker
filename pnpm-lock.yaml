@@ -39,6 +39,9 @@ importers:
       typescript:
         specifier: ^5.2.2
         version: 5.4.5
+      wine-tracker-models:
+        specifier: workspace:*
+        version: link:../models
 
   packages/frontend:
     dependencies:
@@ -64,6 +67,8 @@ importers:
       vite:
         specifier: ^5.2.0
         version: 5.2.11
+
+  packages/models: {}
 
 packages:
 

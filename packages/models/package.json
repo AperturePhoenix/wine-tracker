@@ -1,0 +1,10 @@
+{
+  "name": "wine-tracker-models",
+  "version": "1.0.0",
+  "description": "Shared models module for wine-tracker",
+  "main": "index.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "Lance Judan",
+  "license": "MIT"
+}
