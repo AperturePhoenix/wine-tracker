@@ -1,7 +1,3 @@
 {
-  "recommendations": [
-    "eamodio.gitlens",
-    "gruntfuggly.todo-tree",
-    "biomejs.biome"
-  ]
+  "recommendations": ["eamodio.gitlens", "gruntfuggly.todo-tree", "biomejs.biome", "prisma.prisma"]
 }

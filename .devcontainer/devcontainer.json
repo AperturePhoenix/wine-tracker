@@ -20,7 +20,12 @@
   // Configure tool-specific properties.
   "customizations": {
     "vscode": {
-      "extensions": ["biomejs.biome", "eamodio.gitlens", "gruntfuggly.todo-tree"]
+      "extensions": [
+        "biomejs.biome",
+        "eamodio.gitlens",
+        "gruntfuggly.todo-tree",
+        "Prisma.prisma"
+      ]
     }
   }
 

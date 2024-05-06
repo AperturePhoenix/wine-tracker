@@ -14,3 +14,4 @@ services:
     environment:
       POSTGRES_USER: user1
       POSTGRES_PASSWORD: user1pass
+      POSTGRES_DB: dev
