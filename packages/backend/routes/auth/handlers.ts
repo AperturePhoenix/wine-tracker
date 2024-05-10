@@ -33,7 +33,6 @@ export async function register(req: Request, res: Response) {
       password: hashSync(reqUser.password, genSaltSync()),
     },
   })
-  await prisma.$disconnect()
 
   // Return created user
   const { password, ...responseUser } = newUser
