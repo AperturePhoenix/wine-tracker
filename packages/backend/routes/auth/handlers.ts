@@ -3,6 +3,7 @@ import { prisma } from "../../utils/db"
 import type { User } from "wine-tracker-models"
 import { genSaltSync, hashSync } from "bcrypt"
 import { z } from "zod"
+import jwt from "jsonwebtoken"
 
 export function login(req: Request, res: Response) {
   res.send("This is the login endpoint")
@@ -18,12 +19,11 @@ const DbUserValidator = z.object({
 
 export async function register(req: Request, res: Response) {
   // Validation
-  const { data: reqUser, error, success} = DbUserValidator.safeParse(req.body)
-  if (!success)
-    return res.status(400).json(error.flatten().fieldErrors)
+  const { data: reqUser, error, success } = DbUserValidator.safeParse(req.body)
+  if (!success) return res.status(400).json(error.flatten().fieldErrors)
 
   // Check if email is already being used
-  const userExists = await prisma.user.findFirst({ where: { email: reqUser.email }})
+  const userExists = await prisma.user.findFirst({ where: { email: reqUser.email } })
   if (userExists) return res.status(400).json({ email: ["Already in use"] })
 
   // Create user
@@ -33,6 +33,10 @@ export async function register(req: Request, res: Response) {
       password: hashSync(reqUser.password, genSaltSync()),
     },
   })
+
+  // Create JWT
+  // TODO: add minimal payload here
+  jwt.sign({}, process.env.JWT_SECRET as string, { expiresIn: 3600, issuer: "Wine Tracker" })
 
   // Return created user
   const { password, ...responseUser } = newUser
