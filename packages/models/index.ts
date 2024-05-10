@@ -9,6 +9,7 @@ export interface DB_User {
 export interface User {
   id: number
   email: string
+  password?: null
   firstName: string
   lastName: string
 }
