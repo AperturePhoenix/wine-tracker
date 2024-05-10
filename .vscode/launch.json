@@ -11,7 +11,8 @@
       "port": 9229,
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}/packages/backend",
-      "preLaunchTask": "Backend: npm debug"
+      "preLaunchTask": "Backend: npm debug",
+      "restart": true
     }
   ]
 }

@@ -1,37 +1,41 @@
 import type { Request, Response } from "express"
-import { PrismaClient } from "@prisma/client"
-import type { ErrorResponse, DB_User, User } from "wine-tracker-models"
-import { genSaltSync, hashSync} from "bcrypt"
+import { prisma } from "../../utils/db"
+import type { User } from "wine-tracker-models"
+import { genSaltSync, hashSync } from "bcrypt"
+import { z } from "zod"
 
 export function login(req: Request, res: Response) {
   res.send("This is the login endpoint")
 }
 
+const DbUserValidator = z.object({
+  id: z.undefined(),
+  email: z.string().email().trim(),
+  password: z.string().trim().min(4),
+  firstName: z.string().trim(),
+  lastName: z.string().trim(),
+})
+
 export async function register(req: Request, res: Response) {
-  const user: DB_User = req.body
+  // Validation
+  const { data: reqUser, error, success} = DbUserValidator.safeParse(req.body)
+  if (!success)
+    return res.status(400).json(error.flatten().fieldErrors)
 
-  // validation
-  const errors: ErrorResponse<DB_User> = {}
-  // TODO: use validation framework
-  if (!user.id) errors.id = "Unknown property"
-  if (!user.email) errors.email = "This field is required"
-  if (!(user.email.includes("@") && user.email.includes("."))) errors.email = "Invalid email address"
-  if (!user.password) errors.password = "This field is required"
-  if (!user.firstName) errors.firstName = "This field is required"
-  if (!user.lastName) errors.lastName = "This field is required"
-
-  if (Object.keys(errors).length > 0) res.status(400).json(errors)
+  // Check if email is already being used
+  const userExists = await prisma.user.findFirst({ where: { email: reqUser.email }})
+  if (userExists) return res.status(400).json({ email: ["Already in use"] })
 
   // Create user
-  const prisma = new PrismaClient()
-  const dbUser = await prisma.user.create({
+  const newUser = await prisma.user.create({
     data: {
-      ...user,
-      password: hashSync(user.password, genSaltSync(10))
+      ...reqUser,
+      password: hashSync(reqUser.password, genSaltSync(10)),
     },
   })
   await prisma.$disconnect()
 
-  const { password, ...responseUser } = dbUser
+  // Return created user
+  const { password, ...responseUser } = newUser
   res.status(200).json(responseUser satisfies User)
 }
