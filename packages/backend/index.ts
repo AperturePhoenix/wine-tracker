@@ -1,6 +1,5 @@
 import express, { type NextFunction, type Request, type Response, json } from "express"
 import authRoutes from "./routes/auth"
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library"
 
 const app = express()
 const port = 3000
