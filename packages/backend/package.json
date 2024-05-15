@@ -4,8 +4,8 @@
   "description": "Express server for Wine Tracker",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon --exec \"node --env-file .env --require ts-node/register index.ts\"",
-    "debug": "nodemon --exec \"node --env-file .env --inspect=0.0.0.0:9229 --require ts-node/register index.ts\""
+    "start": "ts-node-dev --respawn --transpile-only index.ts",
+    "debug": "ts-node-dev --respawn --transpile-only --inspect -- index.ts"
   },
   "keywords": [],
   "author": "Lance Judan",
@@ -22,9 +22,8 @@
     "@types/express": "^4.17.21",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/node": "^20.12.8",
-    "nodemon": "^3.1.0",
     "prisma": "^5.13.0",
-    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
     "typescript": "^5.2.2",
     "wine-tracker-models": "workspace:*"
   }
