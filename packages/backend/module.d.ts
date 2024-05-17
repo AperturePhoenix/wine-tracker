@@ -4,4 +4,12 @@ export declare global {
       JWT_SECRET: string
     }
   }
+
+  namespace Express {
+    interface Request {
+      session: {
+        userId: number
+      }
+    }
+  }
 }
