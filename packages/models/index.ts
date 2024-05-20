@@ -14,6 +14,19 @@ export interface User {
   lastName: string
 }
 
+export interface Wine {
+  id: number
+  name: string
+  brand: string
+  year?: number | null
+  type?: string | null
+  alcoholContent?: number | null
+  region?: string | null
+  country?: string | null
+  description?: string | null
+  image?: string | null
+}
+
 /** https://developer.mozilla.org/en-US/docs/Glossary/Primitive */
 export type Primitive = string | number | bigint | boolean | undefined | symbol | null
 

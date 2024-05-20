@@ -1,9 +1,13 @@
+import { Router } from "express"
+
 import type { Request, Response } from "express"
-import { omitPassword, prisma } from "../../utils/db"
+import { omitPassword, prisma } from "../utils/db"
 import { compareSync, genSaltSync, hashSync } from "bcrypt"
 import { z } from "zod"
 import jwt from "jsonwebtoken"
 import type { User } from "@prisma/client"
+
+const router = Router()
 
 const generateAccessToken = (user: User) => {
   return jwt.sign({ sub: user.id }, process.env.JWT_SECRET, { expiresIn: 3600, issuer: "Wine Tracker" })
@@ -14,7 +18,7 @@ const LoginValidator = z.object({
   password: z.string(),
 })
 
-export async function login(req: Request, res: Response) {
+router.post("/login", async (req: Request, res: Response) => {
   const { data, error, success } = LoginValidator.safeParse(req.body)
   if (!success) {
     res.status(400).json(error.flatten().fieldErrors)
@@ -30,7 +34,7 @@ export async function login(req: Request, res: Response) {
   }
 
   res.status(200).json({ user: omitPassword(user), accessToken: generateAccessToken(user) })
-}
+})
 
 const DbUserValidator = z.object({
   id: z.undefined(),
@@ -40,7 +44,7 @@ const DbUserValidator = z.object({
   lastName: z.string().trim(),
 })
 
-export async function register(req: Request, res: Response) {
+router.post("/register", async (req: Request, res: Response) => {
   // Validation
   const { data: reqUser, error, success } = DbUserValidator.safeParse(req.body)
   if (!success) {
@@ -65,4 +69,6 @@ export async function register(req: Request, res: Response) {
 
   // Create access token
   res.status(200).json({ user: omitPassword(newUser), accessToken: generateAccessToken(newUser) })
-}
+})
+
+export default router
