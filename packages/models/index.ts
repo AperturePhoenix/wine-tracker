@@ -9,6 +9,12 @@ export interface DB_User {
 export interface User {
   id: number
   email: string
+  password?: null
   firstName: string
   lastName: string
 }
+
+/** https://developer.mozilla.org/en-US/docs/Glossary/Primitive */
+export type Primitive = string | number | bigint | boolean | undefined | symbol | null
+
+export type ErrorResponse<T> = { [K in keyof T]?: T[K] extends Primitive | Array<any> ? string : ErrorResponse<T[K]> }
