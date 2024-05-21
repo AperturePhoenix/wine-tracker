@@ -19,6 +19,7 @@ model User {
   password String
   firstName String
   lastName String
+  reviews Review[]
 }
 
 model Wine {
@@ -32,4 +33,17 @@ model Wine {
   country String?
   description String?
   image String?
+  reviews Review[]
+}
+
+model Review {
+  id Int @id @default(autoincrement())
+  userId Int
+  user User @relation(fields: [userId], references: [id])
+  wineId Int
+  wine Wine @relation(fields: [wineId], references: [id])
+  rating Int
+  wouldBuyAgain Boolean
+  sweetness Int
+  notes String?
 }
