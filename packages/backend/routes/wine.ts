@@ -3,24 +3,33 @@ import z from "zod"
 import type { Wine } from "wine-tracker-models"
 import { prisma } from "../utils/db"
 
-const CreateWineValidator = z.object({
+const WineValidator = z.object({
   name: z.string().trim(),
   brand: z.string().trim(),
-  year: z.number().optional(),
-  type: z.string().trim().optional(),
-  alcoholContent: z.number().optional(),
-  region: z.string().trim().optional(),
-  country: z.string().trim().optional(),
-  description: z.string().trim().optional(),
-  image: z.string().trim().optional(),
+  year: z.number().nullable().optional(),
+  type: z.string().trim().nullable().optional(),
+  alcoholContent: z.number().nullable().optional(),
+  region: z.string().trim().nullable().optional(),
+  country: z.string().trim().nullable().optional(),
+  description: z.string().trim().nullable().optional(),
+  image: z.string().trim().nullable().optional(),
 })
 
 const router = Router()
 
-// router.get("", read)
+router.get("/:id", async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+  if (Number.isNaN(id)) {
+    res.status(200).json("id must be a number")
+    return
+  }
+
+  const wine = await prisma.wine.findFirst({ where: { id } })
+  res.status(wine ? 200 : 404).json(wine)
+})
 
 router.post("", async (req: Request, res: Response) => {
-  const { data, error, success } = CreateWineValidator.safeParse(req.body)
+  const { data, error, success } = WineValidator.safeParse(req.body)
   if (!success) {
     res.status(400).json(error.flatten().fieldErrors)
     return
@@ -30,6 +39,33 @@ router.post("", async (req: Request, res: Response) => {
   res.status(200).json(wine satisfies Wine)
 })
 
-// router.put("", update)
+router.put("/:id", async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+  if (Number.isNaN(id)) {
+    res.status(200).json("id must be a number")
+    return
+  }
+
+  const { data, error, success } = WineValidator.safeParse(req.body)
+  if (!success) {
+    res.status(400).json(error.flatten().fieldErrors)
+    return
+  }
+
+  const wine = await prisma.wine.update({
+    where: { id },
+    data: {
+      year: null,
+      type: null,
+      alcoholContent: null,
+      region: null,
+      country: null,
+      description: null,
+      image: null,
+      ...data,
+    },
+  })
+  res.status(200).json(wine satisfies Wine)
+})
 
 export default router
