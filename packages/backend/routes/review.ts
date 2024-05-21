@@ -54,7 +54,7 @@ router.put("/:id", requireAuth, async (req: Request, res: Response) => {
   }
 
   const review = await prisma.review.update({
-    where: { id, userId: 2 },
+    where: { id, userId: req.session.userId },
     data: {
       ...data,
     },
