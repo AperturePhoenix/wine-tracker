@@ -40,7 +40,7 @@ router.post("", requireAuth, async (req: Request, res: Response) => {
   res.status(200).json(review satisfies Review)
 })
 
-router.put("/:id", async (req: Request, res: Response) => {
+router.put("/:id", requireAuth, async (req: Request, res: Response) => {
   const id = Number(req.params.id)
   if (Number.isNaN(id)) {
     res.status(200).json("id must be a number")
@@ -54,7 +54,7 @@ router.put("/:id", async (req: Request, res: Response) => {
   }
 
   const review = await prisma.review.update({
-    where: { id },
+    where: { id, userId: 2 },
     data: {
       ...data,
     },
