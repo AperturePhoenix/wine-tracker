@@ -27,6 +27,16 @@ export interface Wine {
   image?: string | null
 }
 
+export interface Review {
+  id: number
+  userId: number
+  wineId: number
+  rating: number
+  wouldBuyAgain: boolean
+  sweetness: number
+  notes?: string | null
+}
+
 /** https://developer.mozilla.org/en-US/docs/Glossary/Primitive */
 export type Primitive = string | number | bigint | boolean | undefined | symbol | null
 

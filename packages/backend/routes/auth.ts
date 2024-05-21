@@ -1,5 +1,4 @@
 import { Router } from "express"
-
 import type { Request, Response } from "express"
 import { omitPassword, prisma } from "../utils/db"
 import { compareSync, genSaltSync, hashSync } from "bcrypt"
