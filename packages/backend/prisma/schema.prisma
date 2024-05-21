@@ -20,3 +20,16 @@ model User {
   firstName String
   lastName String
 }
+
+model Wine {
+  id Int @id @default(autoincrement())
+  name String @unique
+  brand String
+  year Int?
+  type String?
+  alcoholContent Float?
+  region String?
+  country String?
+  description String?
+  image String?
+}

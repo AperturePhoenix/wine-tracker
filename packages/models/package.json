@@ -6,5 +6,8 @@
   "scripts": {},
   "keywords": [],
   "author": "Lance Judan",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
 }
