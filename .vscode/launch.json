@@ -12,7 +12,24 @@
       "skipFiles": ["<node_internals>/**"],
       "cwd": "${workspaceFolder}/packages/backend",
       "preLaunchTask": "Backend: npm debug",
+      "postDebugTask": "Stop All",
       "restart": true
+    },
+    {
+      "name": "Frontend",
+      "request": "launch",
+      "type": "msedge",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/packages/frontend",
+      "preLaunchTask": "Frontend: npm start",
+      "postDebugTask": "Stop All"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Fullstack",
+      "configurations": ["Backend", "Frontend"],
+      "stopAll": true
     }
   ]
 }

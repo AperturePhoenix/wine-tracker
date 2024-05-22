@@ -2,6 +2,8 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "Backend: npm debug",
+      "detail": "Start backend in debug",
       "type": "npm",
       "script": "debug",
       "path": "packages/backend",
@@ -20,9 +22,49 @@
             "message": 3
           }
         ]
-      },
-      "label": "Backend: npm debug",
-      "detail": "Start backend in debug"
+      }
+    },
+    {
+      "label": "Frontend: npm start",
+      "detail": "Start frontend in debug",
+      "type": "npm",
+      "script": "start",
+      "path": "packages/frontend",
+      "isBackground": true,
+      "problemMatcher": {
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".",
+          "endsPattern": "."
+        },
+        "pattern": [
+          {
+            "regexp": "^([^\\\\s].*)\\\\((\\\\d+,\\\\d+)\\\\):\\\\s*(.*)$",
+            "file": 1,
+            "location": 2,
+            "message": 3
+          }
+        ]
+      }
+    },
+    {
+      "label": "Debug Fullstack",
+      "detail": "Start frontend and backend in debug",
+      "dependsOn": ["Backend: npm debug", "Frontend: npm start"],
+      "dependsOrder": "parallel"
+    },
+    {
+      "label": "Stop All",
+      "command": "echo ${input:terminate}",
+      "type": "shell"
+    }
+  ],
+  "inputs": [
+    {
+      "id": "terminate",
+      "type": "command",
+      "command": "workbench.action.tasks.terminate",
+      "args": "terminateAll"
     }
   ]
 }
