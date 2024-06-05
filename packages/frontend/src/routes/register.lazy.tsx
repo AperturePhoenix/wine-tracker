@@ -1,11 +1,11 @@
-import { Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
+import { Stack, Card, CardContent, Typography, TextField, Button } from "@mui/material"
 import { createLazyFileRoute } from "@tanstack/react-router"
 
-export const Route: unknown = createLazyFileRoute("/login")({
-  component: Login,
+export const Route: unknown = createLazyFileRoute("/register")({
+  component: Register,
 })
 
-function Login() {
+function Register(): JSX.Element {
   return (
     <Stack
       direction="row"
@@ -15,9 +15,11 @@ function Login() {
       <Card>
         <CardContent>
           <Stack direction="column" spacing={2}>
-            <Typography variant="h5">Login</Typography>
-            <TextField label="Email" type="email" />
+            <Typography variant="h5">Register</Typography>
+            <TextField label="Email" />
             <TextField label="Password" type="password" />
+            <TextField label="First Name" />
+            <TextField label="Last Name" />
             <Button variant="contained">Submit</Button>
           </Stack>
         </CardContent>

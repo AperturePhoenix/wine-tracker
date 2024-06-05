@@ -13,6 +13,9 @@ export const Route = createRootRoute({
           <Link to="/login">
             <Button style={{ color: "white" }}>Login</Button>
           </Link>
+          <Link to="/register">
+            <Button style={{ color: "white" }}>Register</Button>
+          </Link>
         </Toolbar>
       </AppBar>
       <Toolbar />
