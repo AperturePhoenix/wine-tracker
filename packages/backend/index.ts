@@ -1,4 +1,5 @@
 import express, { type NextFunction, type Request, type Response, json } from "express"
+import cors from "cors"
 import authRoutes from "./routes/auth"
 import wineRoutes from "./routes/wine"
 import reviewRoutes from "./routes/review"
@@ -7,6 +8,7 @@ const app = express()
 const port = 3000
 
 // middlewares
+app.use(cors())
 app.use(json())
 
 // routes
