@@ -16,7 +16,7 @@ function Login() {
     if (!email || !password) return
 
     const api = API.getInstance()
-    api.login(email, password)
+    await api.login(email, password)
   }
 
   return (

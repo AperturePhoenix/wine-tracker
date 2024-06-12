@@ -1,11 +1,11 @@
 import type { AxiosInstance } from "axios"
 import axios from "axios"
-import type { User } from "wine-tracker-models"
+import type { User, Wine } from "wine-tracker-models"
 
 export default class API {
   private static _instance: API
 
-  private client: AxiosInstance
+  client: AxiosInstance
   private user?: User
   private accessToken?: string
 
@@ -30,3 +30,6 @@ export default class API {
     this.client.defaults.headers.common.Authorization = `Bearer ${this.accessToken}`
   }
 }
+
+export const createWine = async (wine: Omit<Wine, "id">): Promise<Wine> =>
+  (await API.getInstance().client.post<Wine>("http://localhost:3000/wine", wine)).data
