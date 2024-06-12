@@ -8,7 +8,7 @@ export const Route = createRootRoute({
         <Toolbar>
           {/* TODO: Add app icon here */}
           <Typography variant="h5" flexGrow={1}>
-            Wine Tracker
+            <Link to="/">Wine Tracker</Link>
           </Typography>
           <Link to="/login">
             <Button style={{ color: "white" }}>Login</Button>
