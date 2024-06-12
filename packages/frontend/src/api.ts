@@ -29,6 +29,18 @@ export default class API {
     this.accessToken = accessToken
     this.client.defaults.headers.common.Authorization = `Bearer ${this.accessToken}`
   }
+
+  async register(newUser: Omit<User, "id">): Promise<void> {
+    const response = await axios.post<{ user: User; accessToken: string }>(
+      "http://localhost:3000/auth/register",
+      newUser,
+    )
+
+    const { user, accessToken } = response.data
+    this.user = user
+    this.accessToken = accessToken
+    this.client.defaults.headers.common.Authorization = `Bearer ${this.accessToken}`
+  }
 }
 
 export const createWine = async (wine: Omit<Wine, "id">): Promise<Wine> =>

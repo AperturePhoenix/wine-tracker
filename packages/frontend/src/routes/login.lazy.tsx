@@ -30,8 +30,18 @@ function Login() {
           <form onSubmit={handleSubmit}>
             <Stack direction="column" spacing={2}>
               <Typography variant="h5">Login</Typography>
-              <TextField label="Email" type="email" onChange={(e) => setEmail(e.target.value)} />
-              <TextField label="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
+              <TextField
+                label="Email"
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                InputProps={{ inputProps: { required: true } }}
+              />
+              <TextField
+                label="Password"
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                InputProps={{ inputProps: { required: true } }}
+              />
               <Button type="submit" variant="contained">
                 Submit
               </Button>

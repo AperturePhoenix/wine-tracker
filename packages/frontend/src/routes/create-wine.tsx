@@ -15,7 +15,13 @@ function CreateWine(): JSX.Element {
     await createWine({
       name: target.name.value,
       brand: target.brand.value,
-      year: Number(target.year?.value),
+      year: Number(target.year.value),
+      type: target.type.value,
+      alcoholContent: Number(target.alcoholContent.value),
+      region: target.region.value,
+      country: target.country.value,
+      description: target.description.value,
+      image: target.image.value,
     })
   }
 

@@ -1,11 +1,27 @@
 import { Stack, Card, CardContent, Typography, TextField, Button } from "@mui/material"
 import { createLazyFileRoute } from "@tanstack/react-router"
+import type { FormEvent } from "react"
+import type { FormTypes, User } from "wine-tracker-models"
+import API from "../api"
 
 export const Route: unknown = createLazyFileRoute("/register")({
   component: Register,
 })
 
 function Register(): JSX.Element {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault()
+    const target = e.target as typeof e.target & FormTypes<User, typeof e.target>
+    console.log("here")
+
+    await API.getInstance().register({
+      email: target.email.value,
+      password: target.password.value,
+      firstName: target.firstName.value,
+      lastName: target.lastName.value,
+    })
+  }
+
   return (
     <Stack
       direction="row"
@@ -14,14 +30,23 @@ function Register(): JSX.Element {
     >
       <Card>
         <CardContent>
-          <Stack direction="column" spacing={2}>
-            <Typography variant="h5">Register</Typography>
-            <TextField label="Email" />
-            <TextField label="Password" type="password" />
-            <TextField label="First Name" />
-            <TextField label="Last Name" />
-            <Button variant="contained">Submit</Button>
-          </Stack>
+          <form onSubmit={handleSubmit}>
+            <Stack direction="column" spacing={2}>
+              <Typography variant="h5">Register</Typography>
+              <TextField label="Email" name="email" InputProps={{ inputProps: { required: true } }} />
+              <TextField
+                label="Password"
+                name="password"
+                type="password"
+                InputProps={{ inputProps: { required: true } }}
+              />
+              <TextField label="First Name" name="firstName" InputProps={{ inputProps: { required: true } }} />
+              <TextField label="Last Name" name="lastName" InputProps={{ inputProps: { required: true } }} />
+              <Button type="submit" variant="contained">
+                Submit
+              </Button>
+            </Stack>
+          </form>
         </CardContent>
       </Card>
     </Stack>
