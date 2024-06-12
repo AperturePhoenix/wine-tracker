@@ -6,8 +6,8 @@ export default class API {
   private static _instance: API
 
   private client: AxiosInstance
-  private user: User | undefined
-  private accessToken: string | undefined
+  private user?: User
+  private accessToken?: string
 
   private constructor() {
     this.client = axios.create()
@@ -27,5 +27,6 @@ export default class API {
     const { user, accessToken } = response.data
     this.user = user
     this.accessToken = accessToken
+    this.client.defaults.headers.common.Authorization = `Bearer ${this.accessToken}`
   }
 }
