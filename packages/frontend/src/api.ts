@@ -47,3 +47,5 @@ export default apiInstance
 
 export const createWine = async (wine: Omit<Wine, "id">): Promise<Wine> =>
   (await apiInstance.client.post<Wine>("/wine", wine)).data
+
+export const getWines = async (): Promise<Wine[]> => (await apiInstance.client.get<Wine[]>("/wine")).data
