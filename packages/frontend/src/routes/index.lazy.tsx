@@ -17,15 +17,19 @@ function Index() {
   }, [])
 
   return (
-    <Stack direction="column" spacing={2}>
-      {wines?.map((wine) => (
-        <WineCard key={wine.id} wine={wine} />
-      ))}
-      <div className="p-2">
-        <Link to="/create-wine">
-          <h3>Create Wine</h3>
-        </Link>
-      </div>
+    <Stack direction="row">
+      <div style={{ flex: 1 }} />
+      <Stack direction="column" spacing={2} flex={1} margin={2}>
+        {wines?.map((wine) => (
+          <WineCard key={wine.id} wine={wine} />
+        ))}
+        <div className="p-2">
+          <Link to="/create-wine">
+            <h3>Create Wine</h3>
+          </Link>
+        </div>
+      </Stack>
+      <div style={{ flex: 1 }} />
     </Stack>
   )
 }

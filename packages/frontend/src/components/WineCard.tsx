@@ -9,7 +9,7 @@ export interface WineCardProps {
 export default function WineCard({ wine }: WineCardProps): JSX.Element {
   const user = useUser()
   return (
-    <Card sx={{ width: "fit-content" }}>
+    <Card>
       <CardContent>
         <Stack direction="row" spacing={2}>
           <Typography variant="h5">{wine.name}</Typography>
