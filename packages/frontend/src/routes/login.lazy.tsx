@@ -1,13 +1,14 @@
 import { Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
-import { createLazyFileRoute } from "@tanstack/react-router"
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router"
 import { type FormEvent, useState } from "react"
-import API from "../api"
+import apiInstance from "../api"
 
 export const Route: unknown = createLazyFileRoute("/login")({
   component: Login,
 })
 
 function Login() {
+  const navigate = useNavigate({ from: "/login" })
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
@@ -15,8 +16,8 @@ function Login() {
     e.preventDefault()
     if (!email || !password) return
 
-    const api = API.getInstance()
-    await api.login(email, password)
+    await apiInstance.login(email, password)
+    navigate({ to: "/" })
   }
 
   return (
