@@ -1,25 +1,27 @@
 import { Stack, Card, CardContent, Typography, TextField, Button } from "@mui/material"
-import { createLazyFileRoute } from "@tanstack/react-router"
+import { createLazyFileRoute, useNavigate } from "@tanstack/react-router"
 import type { FormEvent } from "react"
 import type { FormTypes, User } from "wine-tracker-models"
-import API from "../api"
+import apiInstance from "../api"
 
 export const Route: unknown = createLazyFileRoute("/register")({
   component: Register,
 })
 
 function Register(): JSX.Element {
+  const navigate = useNavigate({ from: "/register" })
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const target = e.target as typeof e.target & FormTypes<User, typeof e.target>
-    console.log("here")
 
-    await API.getInstance().register({
+    await apiInstance.register({
       email: target.email.value,
       password: target.password.value,
       firstName: target.firstName.value,
       lastName: target.lastName.value,
     })
+    navigate({ to: "/" })
   }
 
   return (
