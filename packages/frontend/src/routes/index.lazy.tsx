@@ -59,6 +59,7 @@ function Index() {
       sweetness: Number(target.sweetness.value),
       notes: target.notes.value,
     })
+    handleCloseReview()
   }
 
   return (

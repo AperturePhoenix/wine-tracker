@@ -1,5 +1,5 @@
 import { Stack, Card, CardContent, Typography, TextField, Button } from "@mui/material"
-import { createFileRoute } from "@tanstack/react-router"
+import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import type { FormEvent } from "react"
 import type { FormTypes, Wine } from "wine-tracker-models"
 import { createWine } from "../api"
@@ -9,20 +9,23 @@ export const Route = createFileRoute("/create-wine")({
 })
 
 function CreateWine(): JSX.Element {
+  const navigate = useNavigate({ from: "/create-wine" })
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const target = e.target as typeof e.target & FormTypes<Wine>
     await createWine({
       name: target.name.value,
       brand: target.brand.value,
-      year: Number(target.year.value),
+      year: target.year.value ? Number(target.year.value) : undefined,
       type: target.type.value,
-      alcoholContent: Number(target.alcoholContent.value),
+      alcoholContent: target.alcoholContent?.value ? Number(target.alcoholContent.value) : undefined,
       region: target.region.value,
       country: target.country.value,
       description: target.description.value,
-      image: target.image.value,
     })
+
+    navigate({ to: "/" })
   }
 
   return (
@@ -49,7 +52,7 @@ function CreateWine(): JSX.Element {
               <TextField label="Region" name="region" />
               <TextField label="Country" name="country" />
               <TextField label="Description" name="description" />
-              <TextField label="TODO: Add image upload" />
+              {/* <TextField label="TODO: Add image upload" /> */}
               <Button type="submit" variant="contained">
                 Submit
               </Button>
