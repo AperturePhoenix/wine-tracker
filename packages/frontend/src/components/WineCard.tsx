@@ -4,9 +4,10 @@ import { useUser } from "../hooks"
 
 export interface WineCardProps {
   wine: Wine
+  onAddReview?: () => void
 }
 
-export default function WineCard({ wine }: WineCardProps): JSX.Element {
+export default function WineCard({ wine, onAddReview }: WineCardProps): JSX.Element {
   const user = useUser()
   return (
     <Card>
@@ -20,7 +21,7 @@ export default function WineCard({ wine }: WineCardProps): JSX.Element {
       </CardContent>
       <CardActions>
         <Button>Show Reviews</Button>
-        {user && <Button>Add a Review</Button>}
+        {user && <Button onClick={() => onAddReview?.()}>Add a Review</Button>}
       </CardActions>
     </Card>
   )

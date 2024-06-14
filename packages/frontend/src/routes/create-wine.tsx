@@ -11,7 +11,7 @@ export const Route = createFileRoute("/create-wine")({
 function CreateWine(): JSX.Element {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const target = e.target as typeof e.target & FormTypes<Wine, typeof e.target>
+    const target = e.target as typeof e.target & FormTypes<Wine>
     await createWine({
       name: target.name.value,
       brand: target.brand.value,
