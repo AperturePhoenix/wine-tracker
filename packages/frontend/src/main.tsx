@@ -1,31 +1,46 @@
+import { CssBaseline, ThemeProvider, createTheme } from "@mui/material"
+import { RouterProvider, createRouter } from "@tanstack/react-router"
 import { StrictMode } from "react"
 import ReactDOM from "react-dom/client"
-import { RouterProvider, createRouter } from "@tanstack/react-router"
-import { CssBaseline } from "@mui/material"
 import "./main.css"
-
-// Import the generated route tree
 import { routeTree } from "./routeTree.gen"
 
-// Create a new router instance
 const router = createRouter({ routeTree })
-
-// Register the router instance for type safety
 declare module "@tanstack/react-router" {
   interface Register {
     router: typeof router
   }
 }
 
-// Render the app
-// biome-ignore lint/style/noNonNullAssertion: <explanation>
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+    primary: {
+      main: "#C32148",
+    },
+  },
+  components: {
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          color: "white",
+          backgroundColor: "#78081C",
+        },
+      },
+    },
+  },
+})
+
+// biome-ignore lint/style/noNonNullAssertion: react boilerplate code
 const rootElement = document.getElementById("root")!
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <StrictMode>
-      <CssBaseline />
-      <RouterProvider router={router} />
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </StrictMode>,
   )
 }

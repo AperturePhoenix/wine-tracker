@@ -10,7 +10,7 @@ function Root(): JSX.Element {
   const user = useUser()
   return (
     <div style={{ width: "100vw", maxWidth: "100vw", height: "100vh", maxHeight: "100vh" }}>
-      <AppBar>
+      <AppBar enableColorOnDark>
         <Toolbar>
           {/* TODO: Add app icon here */}
           <Typography variant="h5" flexGrow={1}>
