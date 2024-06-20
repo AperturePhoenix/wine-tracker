@@ -1,7 +1,8 @@
-import { Button, Card, CardContent, Stack, TextField, Typography } from "@mui/material"
+import { Alert, Button, Card, CardContent, CircularProgress, Stack, TextField, Typography } from "@mui/material"
 import { createLazyFileRoute, useNavigate } from "@tanstack/react-router"
 import { type FormEvent, useState } from "react"
 import apiInstance from "../api"
+import axios from "axios"
 
 export const Route: unknown = createLazyFileRoute("/login")({
   component: Login,
@@ -11,13 +12,21 @@ function Login() {
   const navigate = useNavigate({ from: "/login" })
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
+  const [error, setError] = useState<string>()
+  const [isLoading, setLoading] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
+    setLoading(true)
     if (!email || !password) return
 
-    await apiInstance.login(email, password)
-    navigate({ to: "/" })
+    try {
+      await apiInstance.login(email, password)
+      navigate({ to: "/" })
+    } catch (err) {
+      if (axios.isAxiosError(err)) setError(err.response?.data)
+    }
+    setLoading(false)
   }
 
   return (
@@ -26,7 +35,7 @@ function Login() {
       margin={5}
       style={{ justifyContent: "center", alignItems: "center", alignContent: "center" }}
     >
-      <Card>
+      <Card sx={{ minWidth: "350px" }}>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <Stack direction="column" spacing={2}>
@@ -46,6 +55,12 @@ function Login() {
               <Button type="submit" variant="contained">
                 Submit
               </Button>
+              {isLoading && (
+                <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                  <CircularProgress />
+                </div>
+              )}
+              {error && <Alert severity="error">{error}</Alert>}
             </Stack>
           </form>
         </CardContent>
