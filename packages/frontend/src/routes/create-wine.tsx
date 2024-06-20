@@ -1,8 +1,9 @@
-import { Stack, Card, CardContent, Typography, TextField, Button } from "@mui/material"
+import { Stack, Card, CardContent, Typography, Button, Grid } from "@mui/material"
 import { createFileRoute, useNavigate } from "@tanstack/react-router"
 import type { FormEvent } from "react"
 import type { FormTypes, Wine } from "wine-tracker-models"
 import { createWine } from "../api"
+import GridTextField from "../components/GridTextField"
 
 export const Route = createFileRoute("/create-wine")({
   component: CreateWine,
@@ -34,32 +35,36 @@ function CreateWine(): JSX.Element {
       margin={5}
       style={{ justifyContent: "center", alignItems: "center", alignContent: "center" }}
     >
-      <Card>
+      <div style={{ flex: 1 }} />
+      <Card sx={{ flex: 1 }}>
         <CardContent>
           <form onSubmit={handleSubmit}>
-            <Stack direction="column" spacing={2}>
-              <Typography variant="h5">Add Wine</Typography>
-              <TextField label="Name" name="name" InputProps={{ inputProps: { required: true } }} />
-              <TextField label="Brand" name="brand" InputProps={{ inputProps: { required: true } }} />
-              <TextField
+            <Typography variant="h5" mb={2}>
+              Add Wine
+            </Typography>
+            <Grid container spacing={2} columns={{ xs: 6 }} mb={2}>
+              <GridTextField label="Name" name="name" InputProps={{ inputProps: { required: true } }} />
+              <GridTextField label="Brand" name="brand" InputProps={{ inputProps: { required: true } }} />
+              <GridTextField
                 label="Year"
                 name="year"
                 type="number"
                 InputProps={{ inputProps: { min: 1900, max: new Date().getFullYear() } }}
               />
-              <TextField label="Type" name="type" />
-              <TextField label="Alcohol Content" />
-              <TextField label="Region" name="region" />
-              <TextField label="Country" name="country" />
-              <TextField label="Description" name="description" />
+              <GridTextField label="Type" name="type" />
+              <GridTextField label="Alcohol Content" />
+              <GridTextField label="Region" name="region" />
+              <GridTextField label="Country" name="country" />
+              <GridTextField label="Description" name="description" />
               {/* <TextField label="TODO: Add image upload" /> */}
-              <Button type="submit" variant="contained">
-                Submit
-              </Button>
-            </Stack>
+            </Grid>
+            <Button type="submit" variant="contained">
+              Submit
+            </Button>
           </form>
         </CardContent>
       </Card>
+      <div style={{ flex: 1 }} />
     </Stack>
   )
 }
