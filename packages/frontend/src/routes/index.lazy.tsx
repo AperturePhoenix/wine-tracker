@@ -17,6 +17,7 @@ import type { FormTypes, Review, Wine } from "wine-tracker-models"
 import { getWines, reviewWine } from "../api"
 import WineCard from "../components/WineCard"
 import { useUser } from "../hooks"
+import AddIcon from "@mui/icons-material/Add"
 
 export const Route: unknown = createLazyFileRoute("/")({
   component: Index,
@@ -93,7 +94,9 @@ function Index() {
         ))}
         <div className="p-2">
           <Link to="/create-wine">
-            <h3>Create Wine</h3>
+            <Button variant="contained" startIcon={<AddIcon />}>
+              Add Wine
+            </Button>
           </Link>
         </div>
       </Stack>
