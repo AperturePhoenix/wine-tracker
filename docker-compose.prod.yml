@@ -12,7 +12,7 @@ services:
   frontend:
     image: docker.judan.dev/wine-frontend
     ports:
-      - 80:80
+      - ${FRONTEND_PORT}:80
     restart: unless-stopped
   db:
     image: postgres:16
@@ -23,4 +23,6 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=dev
+    volumes:
+      - ${DB_VOLUME_NAME}:/var/lib/postgresql/data
 
