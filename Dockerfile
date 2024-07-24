@@ -9,7 +9,7 @@ COPY ./packages/backend /app
 WORKDIR /app
 RUN pnpm install --frozen-lockfile
 EXPOSE 3000
-CMD ["pnpm", "start"]
+CMD ["pnpm", "prod"]
 
 FROM base as frontend-build
 COPY ./packages/frontend /app

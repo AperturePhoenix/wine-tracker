@@ -4,6 +4,8 @@
   "description": "Express server for Wine Tracker",
   "main": "index.ts",
   "scripts": {
+    "prod": "pnpm migrate && pnpm start",
+    "migrate": "prisma migrate dev",
     "start": "ts-node-dev --respawn --transpile-only index.ts",
     "debug": "ts-node-dev --respawn --transpile-only --inspect -- index.ts"
   },
