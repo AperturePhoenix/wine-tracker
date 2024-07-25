@@ -60,7 +60,7 @@ function Login() {
                   <CircularProgress />
                 </div>
               )}
-              {error && <Alert severity="error">{error}</Alert>}
+              {error && <Alert severity="error">{JSON.stringify(error)}</Alert>}
             </Stack>
           </form>
         </CardContent>
