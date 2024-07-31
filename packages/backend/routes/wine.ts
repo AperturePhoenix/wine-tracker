@@ -76,4 +76,16 @@ router.put("/:id", async (req: Request, res: Response) => {
   res.status(200).json(wine satisfies Wine)
 })
 
+router.get("/:id/reviews", async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+  if (Number.isNaN(id)) {
+    res.status(200).json("id must be a number")
+    return
+  }
+
+  const reviews = await prisma.$queryRaw`select r.id, r."userId",  r.rating, r."wouldBuyAgain", r.sweetness, r.notes, u."firstName", u."lastName" from "Review" r 
+    right join "User" u on r."userId" = u.id`
+  res.status(200).json(reviews)
+})
+
 export default router
