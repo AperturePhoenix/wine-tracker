@@ -15,9 +15,10 @@ import { Link, createLazyFileRoute } from "@tanstack/react-router"
 import { type FormEvent, useCallback, useEffect, useState } from "react"
 import type { FormTypes, Review, Wine } from "wine-tracker-models"
 import { getWines, reviewWine } from "../api"
-import WineCard from "../components/WineCard"
+import WineSummaryCard from "../components/WineSummaryCard"
 import { useUser } from "../hooks"
 import AddIcon from "@mui/icons-material/Add"
+import WineCard from "../components/WineCard"
 
 export const Route: unknown = createLazyFileRoute("/")({
   component: Index,
@@ -90,7 +91,7 @@ function Index() {
       <div style={{ flex: 1 }} />
       <Stack direction="column" spacing={2} flex={1} margin={2}>
         {wines?.map((wine) => (
-          <WineCard key={wine.id} wine={wine} onAddReview={handleOpenReview(wine)} />
+          <WineSummaryCard key={wine.id} wine={wine} onAddReview={handleOpenReview(wine)} />
         ))}
         <div className="p-2">
           <Link to="/create-wine">
@@ -99,6 +100,9 @@ function Index() {
             </Button>
           </Link>
         </div>
+      </Stack>
+      <Stack direction="column" flex={1} margin={2}>
+        <WineCard wine={{ id: 1, name: "Electric Cherry", brand: "Black Ops", year: 2012 }} />
       </Stack>
       <div style={{ flex: 1 }} />
     </Stack>
