@@ -1,3 +1,9 @@
 {
-  "recommendations": ["eamodio.gitlens", "gruntfuggly.todo-tree", "biomejs.biome", "prisma.prisma"]
+  "recommendations": [
+    "eamodio.gitlens",
+    "gruntfuggly.todo-tree",
+    "biomejs.biome",
+    "prisma.prisma",
+    "ms-azuretools.vscode-docker"
+  ]
 }

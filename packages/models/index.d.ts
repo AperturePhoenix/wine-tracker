@@ -41,3 +41,5 @@ export interface Review {
 export type Primitive = string | number | bigint | boolean | undefined | symbol | null
 
 export type ErrorResponse<T> = { [K in keyof T]?: T[K] extends Primitive | Array<any> ? string : ErrorResponse<T[K]> }
+
+export type FormTypes<T, E = object> = { [Key in keyof T]-?: E & { value: T[Key] } }

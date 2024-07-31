@@ -24,7 +24,8 @@
         "biomejs.biome",
         "eamodio.gitlens",
         "gruntfuggly.todo-tree",
-        "Prisma.prisma"
+        "Prisma.prisma",
+        "ms-azuretools.vscode-docker"
       ]
     }
   }

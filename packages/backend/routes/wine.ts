@@ -4,8 +4,8 @@ import type { Wine } from "wine-tracker-models"
 import { prisma } from "../utils/db"
 
 const WineValidator = z.object({
-  name: z.string().trim(),
-  brand: z.string().trim(),
+  name: z.string().min(3).trim(),
+  brand: z.string().min(3).trim(),
   year: z.number().nullable().optional(),
   type: z.string().trim().nullable().optional(),
   alcoholContent: z.number().nullable().optional(),
@@ -17,15 +17,9 @@ const WineValidator = z.object({
 
 const router = Router()
 
-router.get("/:id", async (req: Request, res: Response) => {
-  const id = Number(req.params.id)
-  if (Number.isNaN(id)) {
-    res.status(200).json("id must be a number")
-    return
-  }
-
-  const wine = await prisma.wine.findFirst({ where: { id } })
-  res.status(wine ? 200 : 404).json(wine)
+router.get("", async (req: Request, res: Response) => {
+  const wines = await prisma.wine.findMany()
+  res.status(200).json(wines)
 })
 
 router.post("", async (req: Request, res: Response) => {
@@ -37,6 +31,17 @@ router.post("", async (req: Request, res: Response) => {
 
   const wine = await prisma.wine.create({ data })
   res.status(200).json(wine satisfies Wine)
+})
+
+router.get("/:id", async (req: Request, res: Response) => {
+  const id = Number(req.params.id)
+  if (Number.isNaN(id)) {
+    res.status(200).json("id must be a number")
+    return
+  }
+
+  const wine = await prisma.wine.findFirst({ where: { id } })
+  res.status(wine ? 200 : 404).json(wine)
 })
 
 router.put("/:id", async (req: Request, res: Response) => {

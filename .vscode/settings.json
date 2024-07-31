@@ -4,5 +4,10 @@
   "editor.defaultFormatter": "biomejs.biome",
   "editor.codeActionsOnSave": {
     "quickfix.biome": "explicit"
+  },
+  "vim.useSystemClipboard": true,
+  "vim.handleKeys": {
+    "<C-s>": false,
+    "<C-p>": false
   }
 }
