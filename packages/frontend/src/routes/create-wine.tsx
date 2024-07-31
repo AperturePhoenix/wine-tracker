@@ -52,7 +52,7 @@ function CreateWine(): JSX.Element {
                 InputProps={{ inputProps: { min: 1900, max: new Date().getFullYear() } }}
               />
               <GridTextField label="Type" name="type" />
-              <GridTextField label="Alcohol Content" />
+              <GridTextField label="Alcohol Content" name="alcoholContent" />
               <GridTextField label="Region" name="region" />
               <GridTextField label="Country" name="country" />
               <GridTextField label="Description" name="description" />

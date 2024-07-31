@@ -57,6 +57,7 @@ router.put("/:id", requireAuth, async (req: Request, res: Response) => {
     where: { id, userId: req.session.userId },
     data: {
       ...data,
+      wineId: id,
     },
   })
   res.status(200).json(review satisfies Review)

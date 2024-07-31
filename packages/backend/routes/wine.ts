@@ -18,7 +18,10 @@ const WineValidator = z.object({
 const router = Router()
 
 router.get("", async (req: Request, res: Response) => {
-  const wines = await prisma.wine.findMany()
+  const wines = await prisma.$queryRaw`select w.id, w.name, w.brand, w.year, w.type, w."alcoholContent", w.region, w.country, w.description, w.image, avg(r.rating) as rating 
+    from "Wine" w 
+    left join "Review" r on r."wineId" = w.id 
+    group by w.id`
   res.status(200).json(wines)
 })
 

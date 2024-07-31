@@ -40,7 +40,11 @@ export default function WineCard({ wine, onAddReview, onShowReview }: WineCardPr
                 {[wine.region, wine.country].filter((v) => v != null && v !== "").join(", ")}
               </Typography>
             )}
-            <Rating value={3.5} precision={0.5} readOnly />
+            {wine.rating ? (
+              <Rating value={wine.rating} precision={0.5} readOnly />
+            ) : (
+              <Typography>Be the first one to rate this</Typography>
+            )}
           </Stack>
           <Stack direction="row">
             <IconButton onClick={() => onShowReview?.()}>

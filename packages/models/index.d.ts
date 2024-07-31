@@ -25,6 +25,7 @@ export interface Wine {
   country?: string | null
   description?: string | null
   image?: string | null
+  rating?: number
 }
 
 export interface Review {

@@ -42,7 +42,7 @@ model Review {
   user User @relation(fields: [userId], references: [id])
   wineId Int
   wine Wine @relation(fields: [wineId], references: [id])
-  rating Int
+  rating Float
   wouldBuyAgain Boolean
   sweetness Int
   notes String?
