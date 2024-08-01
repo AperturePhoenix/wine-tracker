@@ -91,7 +91,21 @@ function Index() {
       <div style={{ flex: 1 }} />
       <Stack ref={drawerRef} direction="column" position="absolute" right={0} overflow="hidden">
         <Slide in={selectedWine != null} direction="left" container={drawerRef.current} unmountOnExit>
-          <Stack direction="column" spacing={2} margin={2}>
+          <Stack
+            direction="column"
+            spacing={2}
+            p={2}
+            sx={(theme) => ({
+              [theme.breakpoints.down("sm")]: {
+                backgroundColor: theme.palette.background.default,
+                width: "100vw",
+                maxWidth: "100vw",
+                height: "calc(100vh - 64px)",
+                maxHeight: "calc(100vh - 64px)",
+                overflow: "auto",
+              },
+            })}
+          >
             <ReviewSidebar wineId={selectedWine?.id} onClose={handleCloseReview} />
           </Stack>
         </Slide>
