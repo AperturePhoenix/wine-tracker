@@ -1,6 +1,5 @@
-import { Button, IconButton, Paper, Rating, Stack, Typography } from "@mui/material"
+import { IconButton, Paper, Rating, Stack, Typography } from "@mui/material"
 import type { Wine } from "wine-tracker-models"
-import { useUser } from "../hooks"
 import stockPhoto from "./example photo.jpg"
 import WineBarIcon from "@mui/icons-material/WineBar"
 import LocationIcon from "@mui/icons-material/LocationOnOutlined"
@@ -9,12 +8,10 @@ import CommentIcon from "@mui/icons-material/Comment"
 
 export interface WineCardProps {
   wine: Wine
-  onAddReview?: () => void
   onShowReview?: () => void
 }
 
-export default function WineCard({ wine, onAddReview, onShowReview }: WineCardProps): JSX.Element {
-  const user = useUser()
+export default function WineCard({ wine, onShowReview }: WineCardProps): JSX.Element {
   return (
     <Paper sx={{ maxWidth: 450, overflow: "hidden" }}>
       <Stack direction="row" spacing={2}>
@@ -51,7 +48,6 @@ export default function WineCard({ wine, onAddReview, onShowReview }: WineCardPr
               <CommentIcon />
             </IconButton>
           </Stack>
-          {user && <Button onClick={() => onAddReview?.()}>Add a Review</Button>}
         </Stack>
         <img alt={`${wine.name}`} src={stockPhoto} width={125} height={300} />
       </Stack>

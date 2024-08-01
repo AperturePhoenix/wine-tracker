@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios"
 import axios from "axios"
-import type { Review, User, Wine } from "wine-tracker-models"
+import type { Review, ReviewWithUser, User, Wine } from "wine-tracker-models"
 
 type Listener = () => void
 
@@ -52,3 +52,6 @@ export const getWines = async (): Promise<Wine[]> => (await apiInstance.client.g
 
 export const reviewWine = async (review: Omit<Review, "id">): Promise<Review> =>
   (await apiInstance.client.post<Review>("/review", review)).data
+
+export const getReviews = async (id: number): Promise<ReviewWithUser[]> =>
+  (await apiInstance.client.get<ReviewWithUser[]>(`/wine/${id}/reviews`)).data

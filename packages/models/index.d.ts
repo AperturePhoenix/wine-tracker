@@ -38,6 +38,8 @@ export interface Review {
   notes?: string | null
 }
 
+export type ReviewWithUser = Review & Pick<User, "firstName" | "lastName">
+
 /** https://developer.mozilla.org/en-US/docs/Glossary/Primitive */
 export type Primitive = string | number | bigint | boolean | undefined | symbol | null
 
