@@ -84,7 +84,8 @@ router.get("/:id/reviews", async (req: Request, res: Response) => {
   }
 
   const reviews = await prisma.$queryRaw`select r.id, r."userId",  r.rating, r."wouldBuyAgain", r.sweetness, r.notes, u."firstName", u."lastName" from "Review" r 
-    right join "User" u on r."userId" = u.id`
+    right join "User" u on r."userId" = u.id
+    where r."wineId" = ${id}`
   res.status(200).json(reviews)
 })
 

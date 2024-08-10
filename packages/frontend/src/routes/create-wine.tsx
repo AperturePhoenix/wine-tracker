@@ -35,14 +35,21 @@ function CreateWine(): JSX.Element {
       margin={5}
       style={{ justifyContent: "center", alignItems: "center", alignContent: "center" }}
     >
-      <div style={{ flex: 1 }} />
+      <Stack
+        sx={(theme) => ({
+          flex: 1,
+          [theme.breakpoints.down("md")]: {
+            flex: 0,
+          },
+        })}
+      />
       <Card sx={{ flex: 1 }}>
         <CardContent>
           <form onSubmit={handleSubmit}>
             <Typography variant="h5" mb={2}>
               Add Wine
             </Typography>
-            <Grid container spacing={2} columns={{ xs: 6 }} mb={2}>
+            <Grid container spacing={2} columns={{ xs: 3, md: 6 }} mb={2}>
               <GridTextField label="Name" name="name" InputProps={{ inputProps: { required: true } }} />
               <GridTextField label="Brand" name="brand" InputProps={{ inputProps: { required: true } }} />
               <GridTextField
@@ -64,7 +71,14 @@ function CreateWine(): JSX.Element {
           </form>
         </CardContent>
       </Card>
-      <div style={{ flex: 1 }} />
+      <Stack
+        sx={(theme) => ({
+          flex: 1,
+          [theme.breakpoints.down("md")]: {
+            flex: 0,
+          },
+        })}
+      />
     </Stack>
   )
 }
