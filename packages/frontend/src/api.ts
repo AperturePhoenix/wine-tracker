@@ -20,7 +20,10 @@ class API {
         .then((response) => {
           this.handleResponse(response.data, accessToken)
         })
-        .catch(() => console.log("Invalid access token"))
+        .catch(() => {
+          localStorage.removeItem("accessToken")
+          console.log("Invalid access token")
+        })
     }
   }
 
