@@ -19,7 +19,7 @@ export default function ReviewCard({ handleEdit, review }: ReviewCardrops): JSX.
               <Typography>
                 {review.firstName} {review.lastName}
               </Typography>
-              <Rating value={review.rating} readOnly />
+              <Rating value={review.rating} precision={0.5} readOnly />
             </Stack>
             {handleEdit && (
               <IconButton onClick={handleEdit} color="primary" sx={{ position: "absolute", right: 0, top: 0 }}>
@@ -28,7 +28,7 @@ export default function ReviewCard({ handleEdit, review }: ReviewCardrops): JSX.
             )}
           </Stack>
           <Typography variant="subtitle2">Would Buy Again: {review.wouldBuyAgain ? "Yes" : "No"}</Typography>
-          <Rating value={review.sweetness} readOnly />
+          <Rating value={review.sweetness} precision={0.5} readOnly />
           <Typography>{review.notes}</Typography>
         </Stack>
       </CardContent>
