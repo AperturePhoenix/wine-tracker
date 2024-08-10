@@ -127,7 +127,9 @@ function ReviewSidebar({ wine, onClose }: { wine: Wine; onClose: () => void }): 
       notes: target.notes.value,
     }
     if (hasReview && reviews) await updateReview({ ...newReview, id: reviews[0].id })
-    else createReview(newReview)
+    else await createReview(newReview)
+
+    handleClose()
   }
 
   return (
