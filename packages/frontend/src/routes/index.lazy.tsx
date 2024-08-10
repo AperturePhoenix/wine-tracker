@@ -2,6 +2,7 @@ import AddIcon from "@mui/icons-material/Add"
 import CloseIcon from "@mui/icons-material/Close"
 import {
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
@@ -11,6 +12,7 @@ import {
   InputLabel,
   MenuItem,
   Paper,
+  Rating,
   Select,
   Slide,
   Stack,
@@ -24,6 +26,8 @@ import { getReviews, getWines, reviewWine } from "../api"
 import ReviewCard from "../components/ReviewCard"
 import WineCard from "../components/WineCard"
 import { useUser } from "../hooks"
+import CheckCircleIcon from "@mui/icons-material/CheckCircle"
+import CancelIcon from "@mui/icons-material/Cancel"
 
 export const Route: unknown = createLazyFileRoute("/")({
   component: Index,
@@ -133,18 +137,42 @@ function ReviewSidebar({ wine, onClose }: { wine: Wine; onClose: () => void }): 
       <Dialog open={isOpen}>
         <form onSubmit={handleSubmitReivew}>
           <DialogTitle>Review For {wine.name}</DialogTitle>
-          <DialogContent>
+          <DialogContent sx={{ minWidth: "300px" }}>
             <Stack direction="column" spacing={2}>
-              <TextField label="Rating" name="rating" variant="filled" fullWidth />
-              <FormControl fullWidth variant="filled">
-                <InputLabel>Would Buy Again</InputLabel>
-                <Select label="Would Buy Again" name="wouldBuyAgain">
-                  <MenuItem value="true">Yes</MenuItem>
-                  <MenuItem value="false">No</MenuItem>
-                </Select>
-              </FormControl>
-              <TextField label="Sweetness" name="sweetness" variant="filled" fullWidth />
-              <TextField label="Notes" name="notes" variant="filled" fullWidth />
+              <Stack direction="row" justifyContent="space-between">
+                <Typography component="legend">Rating</Typography>
+                <Rating name="rating" precision={0.5} defaultValue={hasReview && reviews ? reviews[0].rating : 0} />
+              </Stack>
+              <Stack direction="row" justifyContent="space-between">
+                <Typography component="legend">Sweetness</Typography>
+                <Rating
+                  name="sweetness"
+                  precision={0.5}
+                  defaultValue={hasReview && reviews ? reviews[0].sweetness : 0}
+                />
+              </Stack>
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
+                <Typography component="legend">Would by again</Typography>
+                <Checkbox
+                  name="wouldBuyAgain"
+                  icon={<CancelIcon />}
+                  checkedIcon={<CheckCircleIcon />}
+                  sx={{
+                    color: "red",
+                    "&.Mui-checked": {
+                      color: "green",
+                    },
+                  }}
+                />
+              </Stack>
+              <TextField
+                label="Notes"
+                name="notes"
+                defaultValue={hasReview && reviews ? reviews[0].notes : ""}
+                variant="filled"
+                multiline
+                fullWidth
+              />
             </Stack>
           </DialogContent>
           <DialogActions>
