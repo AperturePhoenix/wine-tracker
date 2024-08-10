@@ -28,7 +28,7 @@ export default function ReviewCard({ handleEdit, review }: ReviewCardrops): JSX.
             )}
           </Stack>
           <Typography variant="subtitle2">Would Buy Again: {review.wouldBuyAgain ? "Yes" : "No"}</Typography>
-          <Typography variant="subtitle2">Sweetness: {review.sweetness}</Typography>
+          <Rating value={review.sweetness} readOnly />
           <Typography>{review.notes}</Typography>
         </Stack>
       </CardContent>

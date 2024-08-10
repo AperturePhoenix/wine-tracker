@@ -50,8 +50,11 @@ export const createWine = async (wine: Omit<Wine, "id">): Promise<Wine> =>
 
 export const getWines = async (): Promise<Wine[]> => (await apiInstance.client.get<Wine[]>("/wine")).data
 
-export const reviewWine = async (review: Omit<Review, "id">): Promise<Review> =>
+export const createReview = async (review: Omit<Review, "id">): Promise<Review> =>
   (await apiInstance.client.post<Review>("/review", review)).data
+
+export const updateReview = async (review: Review): Promise<Review> =>
+  (await apiInstance.client.put<Review>(`/review/${review.id}`, review)).data
 
 export const getReviews = async (id: number): Promise<ReviewWithUser[]> =>
   (await apiInstance.client.get<ReviewWithUser[]>(`/wine/${id}/reviews`)).data

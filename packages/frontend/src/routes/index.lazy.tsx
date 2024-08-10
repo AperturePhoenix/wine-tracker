@@ -7,13 +7,9 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
-  FormControl,
   IconButton,
-  InputLabel,
-  MenuItem,
   Paper,
   Rating,
-  Select,
   Slide,
   Stack,
   TextField,
@@ -22,7 +18,7 @@ import {
 import { Link, createLazyFileRoute } from "@tanstack/react-router"
 import { type FormEvent, useEffect, useRef, useState } from "react"
 import type { FormTypes, Review, ReviewWithUser, Wine } from "wine-tracker-models"
-import { getReviews, getWines, reviewWine } from "../api"
+import { getReviews, getWines, createReview, updateReview } from "../api"
 import ReviewCard from "../components/ReviewCard"
 import WineCard from "../components/WineCard"
 import { useUser } from "../hooks"
@@ -122,19 +118,21 @@ function ReviewSidebar({ wine, onClose }: { wine: Wine; onClose: () => void }): 
     if (!user) return
 
     const target = e.target as typeof e.target & FormTypes<Review>
-    await reviewWine({
+    const newReview = {
       userId: user.id,
       wineId: wine.id,
       rating: Number(target.rating.value),
-      wouldBuyAgain: Boolean(target.wouldBuyAgain.value),
+      wouldBuyAgain: Boolean(target.wouldBuyAgain.checked),
       sweetness: Number(target.sweetness.value),
       notes: target.notes.value,
-    })
+    }
+    if (hasReview && reviews) await updateReview({ ...newReview, id: reviews[0].id })
+    else createReview(newReview)
   }
 
   return (
     <>
-      <Dialog open={isOpen}>
+      <Dialog open={isOpen} onClose={handleClose}>
         <form onSubmit={handleSubmitReivew}>
           <DialogTitle>Review For {wine.name}</DialogTitle>
           <DialogContent sx={{ minWidth: "300px" }}>
@@ -177,7 +175,7 @@ function ReviewSidebar({ wine, onClose }: { wine: Wine; onClose: () => void }): 
           </DialogContent>
           <DialogActions>
             <Button onClickCapture={handleClose}>Close</Button>
-            <Button type="submit">Submit</Button>
+            <Button type="submit">{hasReview ? "Update" : "Submit"}</Button>
           </DialogActions>
         </form>
       </Dialog>
