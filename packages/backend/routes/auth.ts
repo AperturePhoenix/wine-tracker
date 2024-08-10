@@ -5,6 +5,7 @@ import { compareSync, genSaltSync, hashSync } from "bcrypt"
 import { z } from "zod"
 import jwt from "jsonwebtoken"
 import type { User } from "@prisma/client"
+import { requireAuth } from "../middlewares"
 
 const router = Router()
 
@@ -33,6 +34,15 @@ router.post("/login", async (req: Request, res: Response) => {
   }
 
   res.status(200).json({ user: omitPassword(user), accessToken: generateAccessToken(user) })
+})
+
+router.post("/getUser", requireAuth, async (req: Request, res: Response) => {
+  const user = await prisma.user.findFirst({ where: { id: req.session.userId } })
+  if (!user) {
+    res.sendStatus(404)
+    return
+  }
+  res.status(200).json(omitPassword(user))
 })
 
 const DbUserValidator = z.object({
