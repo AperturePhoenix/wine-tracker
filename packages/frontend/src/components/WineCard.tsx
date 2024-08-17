@@ -42,6 +42,7 @@ export default function WineCard({ wine, onShowReview }: WineCardProps): JSX.Ele
             ) : (
               <Typography>Be the first one to rate this</Typography>
             )}
+            {wine.description && <Typography display="flex">{wine.description}</Typography>}
           </Stack>
           <Stack direction="row">
             <IconButton onClick={() => onShowReview?.()}>
