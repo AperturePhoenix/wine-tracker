@@ -9,7 +9,7 @@ export const Route = createRootRoute({
 function Root(): JSX.Element {
   const user = useUser()
   return (
-    <div style={{ width: "100vw", maxWidth: "100vw", height: "100vh", maxHeight: "100vh" }}>
+    <div>
       <AppBar enableColorOnDark>
         <Toolbar>
           {/* TODO: Add app icon here */}

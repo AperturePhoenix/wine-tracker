@@ -62,7 +62,7 @@ function Index() {
         </div>
       </Stack>
       <div style={{ flex: 1 }} />
-      <Stack ref={drawerRef} direction="column" position="absolute" right={0} overflow="hidden">
+      <Stack ref={drawerRef} direction="column" position="fixed" right={0} overflow="hidden">
         <Slide in={selectedWine && showSidebar} direction="left" container={drawerRef.current} unmountOnExit>
           <Stack
             direction="column"
