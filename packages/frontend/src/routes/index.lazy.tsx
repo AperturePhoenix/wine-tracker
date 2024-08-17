@@ -7,6 +7,7 @@ import {
   DialogActions,
   DialogContent,
   DialogTitle,
+  Grid,
   IconButton,
   Paper,
   Rating,
@@ -48,21 +49,35 @@ function Index() {
 
   return (
     <Stack direction="row">
-      <div style={{ flex: 1 }} />
-      <Stack direction="column" spacing={2} flex={1} margin={2}>
-        {wines?.map((wine) => (
-          <WineCard key={wine.id} wine={wine} onShowReview={handleOpenReview(wine)} />
-        ))}
-        <div className="p-2">
+      <Stack direction="column" spacing={2} margin={2} width="100%">
+        <Stack direction="row" spacing={2}>
+          <TextField label="Search" fullWidth />
           <Link to="/create-wine">
             <Button variant="contained" startIcon={<AddIcon />}>
               Add Wine
             </Button>
           </Link>
-        </div>
+        </Stack>
+        <Grid container spacing={2} left="-1rem" position="relative" columns={{ xs: 4, sm: 8, md: 12, lg: 16 }}>
+          {wines?.map((wine) => (
+            <Grid item key={wine.id} xs={4}>
+              <WineCard wine={wine} onShowReview={handleOpenReview(wine)} />
+            </Grid>
+          ))}
+        </Grid>
       </Stack>
-      <div style={{ flex: 1 }} />
-      <Stack ref={drawerRef} direction="column" position="fixed" right={0} overflow="hidden">
+      <Stack
+        ref={drawerRef}
+        direction="column"
+        overflow="hidden"
+        sx={(theme) => ({
+          [theme.breakpoints.down("sm")]: {
+            position: "fixed",
+            right: 0,
+            zIndex: 2,
+          },
+        })}
+      >
         <Slide in={selectedWine && showSidebar} direction="left" container={drawerRef.current} unmountOnExit>
           <Stack
             direction="column"
@@ -73,8 +88,8 @@ function Index() {
                 backgroundColor: theme.palette.background.default,
                 width: "100vw",
                 maxWidth: "100vw",
-                height: "calc(100vh - 64px)",
-                maxHeight: "calc(100vh - 64px)",
+                height: "calc(100vh - 56px)",
+                maxHeight: "calc(100vh - 56px)",
                 overflow: "auto",
               },
             })}
